@@ -2,6 +2,7 @@
 layout: page
 title: Version Control with Git
 ---
+We'll change this section to take the point of view of just one person:
 Wolfman and Dracula have been hired by Universal Missions
 (a space services spinoff from Euphoric State University)
 to investigate if it is possible to send their next planetary lander to Mars.
