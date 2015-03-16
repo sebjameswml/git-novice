@@ -39,7 +39,7 @@ $ git config --global core.editor "nano"
 
 (Please use your own name and email address instead of Dracula's,
 and please make sure you choose an editor that's actually on your system,
-such as `notepad` on Windows, though nano should be fine for our course.)
+such as `notepad` on Windows.)
 
 Git commands are written `git verb`,
 where `verb` is what we actually want it to do.
