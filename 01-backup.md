@@ -35,6 +35,7 @@ $ git config --global user.name "Vlad Dracula"
 $ git config --global user.email "vlad@tran.sylvan.ia"
 $ git config --global color.ui "auto"
 $ git config --global core.editor "nano"
+$ git config --global core.autocrlf "true"
 ~~~
 
 (Please use your own name and email address instead of Dracula's,
@@ -48,10 +49,11 @@ we're telling Git:
 
 *   our name and email address,
 *   to colorize output,
-*   what our favorite text editor is, and
-*   that we want to use these settings globally (i.e., for every project),
+*   what our favorite text editor is,
+*   that we want to use these settings globally (i.e., for every project), and
+*   That we want git to preserve DOS style line endings (as we're on Managed Desktop)
 
-The four commands above only need to be run once:
+The five commands above only need to be run once:
 the flag `--global` tells Git to use the settings for every project on this machine.
 
 > ## Proxy {.callout}
@@ -75,7 +77,8 @@ the flag `--global` tells Git to use the settings for every project on this mach
 
 We're going to work on a set of pre-existing files during this course,
 but we'll turn that into a git repository so that we can track changes
-made during the course. First download the course material:
+made during the course. First download the course material. You can do
+this with a few short commands on Linux or Mac:
 
 ~~~ {.bash}
 $ wget ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip
@@ -83,7 +86,39 @@ $ unzip BootcampFiles.zip
 $ cd BootcampFiles
 ~~~
 
-and tell Git to make it a [repository](reference.html#repository)&mdash;a place where
+On the Managed Desktop, paste
+
+ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip
+
+into an Internet Explorer window and save the file it opens. When I
+did this, it saved the file into ~/ManW7/Downloads/ so I did:
+
+~~~ {.bash}
+$ unzip ~/ManW7/Downloads/BootcampFiles.zip
+$ cd BootcampFiles
+~~~
+
+Let's just see how much information is stored inside Bootcampfiles:
+
+~~~ {.bash}
+$ du -hc .
+~~~
+
+~~~ {.output}
+4.0K	./work
+124K	./ArmsLegs
+12K	./Exercises/Literature
+8.0K	./Exercises/STRDIST_Test_Data
+244K	./Exercises
+512K	./InstructorMaterials/html
+864K	./InstructorMaterials
+8.0K	./Test_Data
+704K	./Reference
+2.9M	.
+2.9M	total
+~~~
+
+Now lets tell Git to make this a [repository](reference.html#repository)&mdash;a place where
 Git can store old versions of our files:
 
 ~~~ {.bash}
@@ -111,13 +146,34 @@ bootcampsetup.m  HeightWaistData.txt   S01_HealthData.mat
 ~~~
 
 Git stores information about the project in this special sub-directory.
-If we ever delete it,
-we will lose the project's history.
+If we ever delete it, we will lose the project's history.
 
-## Adding the currently existing files.
+However, right now, .git contains very little data:
 
-We're going to skip through the first step of adding the pre-existing
-files without explanation here. Exactly what we're doing here will be
+~~~ {.bash}
+$ du -hc .git
+~~~
+
+~~~ {.output}
+4.0K	.git/refs/heads
+4.0K	.git/refs/tags
+12K	.git/refs
+4.0K	.git/branches
+44K	.git/hooks
+8.0K	.git/info
+4.0K	.git/objects/info
+4.0K	.git/objects/pack
+12K	.git/objects
+96K	.git
+96K	total
+~~~
+
+It certainly doesn't have at least one copy of every file in the project!
+
+## Adding the project files.
+
+We're going to quickly add the pre-existing files to the repository
+without much explanation here. Exactly what we're doing here will be
 explained later in the tutorial.
 
 ~~~ {.bash}
@@ -138,6 +194,14 @@ $ git status
 #
 nothing to commit (create/copy files and use "git add" to track)
 ~~~
+
+We can check that there is now some information in .git using
+
+~~~ {.bash}
+$ du -hc .git
+~~~
+
+There should now be much more data in there.
 
 
 ## Tracking Changes to Files

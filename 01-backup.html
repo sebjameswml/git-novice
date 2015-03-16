@@ -48,16 +48,18 @@
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> config --global user.name <span class="st">&quot;Vlad Dracula&quot;</span>
 $ <span class="kw">git</span> config --global user.email <span class="st">&quot;vlad@tran.sylvan.ia&quot;</span>
 $ <span class="kw">git</span> config --global color.ui <span class="st">&quot;auto&quot;</span>
-$ <span class="kw">git</span> config --global core.editor <span class="st">&quot;nano&quot;</span></code></pre>
+$ <span class="kw">git</span> config --global core.editor <span class="st">&quot;nano&quot;</span>
+$ <span class="kw">git</span> config --global core.autocrlf <span class="st">&quot;true&quot;</span></code></pre>
 <p>(Please use your own name and email address instead of Dracula's, and please make sure you choose an editor that's actually on your system, such as <code>notepad</code> on Windows.)</p>
 <p>Git commands are written <code>git verb</code>, where <code>verb</code> is what we actually want it to do. In this case, we're telling Git:</p>
 <ul>
 <li>our name and email address,</li>
 <li>to colorize output,</li>
-<li>what our favorite text editor is, and</li>
-<li>that we want to use these settings globally (i.e., for every project),</li>
+<li>what our favorite text editor is,</li>
+<li>that we want to use these settings globally (i.e., for every project), and</li>
+<li>That we want git to preserve DOS style line endings (as we're on Managed Desktop)</li>
 </ul>
-<p>The four commands above only need to be run once: the flag <code>--global</code> tells Git to use the settings for every project on this machine.</p>
+<p>The five commands above only need to be run once: the flag <code>--global</code> tells Git to use the settings for every project on this machine.</p>
 <div id="proxy" class="callout">
 <h2>Proxy</h2>
 <p>In some networks you need to use a proxy. If this is the case you may also need to tell Git about the proxy:</p>
@@ -68,11 +70,29 @@ $ <span class="kw">git</span> config --global https.proxy proxy-url</code></pre>
 $ <span class="kw">git</span> config --global --unset https.proxy</code></pre>
 </div>
 <h2 id="creating-a-repository">Creating a Repository</h2>
-<p>We're going to work on a set of pre-existing files during this course, but we'll turn that into a git repository so that we can track changes made during the course. First download the course material:</p>
+<p>We're going to work on a set of pre-existing files during this course, but we'll turn that into a git repository so that we can track changes made during the course. First download the course material. You can do this with a few short commands on Linux or Mac:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip
 $ <span class="kw">unzip</span> BootcampFiles.zip
 $ <span class="kw">cd</span> BootcampFiles</code></pre>
-<p>and tell Git to make it a <a href="reference.html#repository">repository</a>—a place where Git can store old versions of our files:</p>
+<p>On the Managed Desktop, paste</p>
+<p>ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip</p>
+<p>into an Internet Explorer window and save the file it opens. When I did this, it saved the file into ~/ManW7/Downloads/ so I did:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">unzip</span> ~/ManW7/Downloads/BootcampFiles.zip
+$ <span class="kw">cd</span> BootcampFiles</code></pre>
+<p>Let's just see how much information is stored inside Bootcampfiles:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">du</span> -hc .</code></pre>
+<pre class="output"><code>4.0K    ./work
+124K    ./ArmsLegs
+12K ./Exercises/Literature
+8.0K    ./Exercises/STRDIST_Test_Data
+244K    ./Exercises
+512K    ./InstructorMaterials/html
+864K    ./InstructorMaterials
+8.0K    ./Test_Data
+704K    ./Reference
+2.9M    .
+2.9M    total</code></pre>
+<p>Now lets tell Git to make this a <a href="reference.html#repository">repository</a>—a place where Git can store old versions of our files:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> init</code></pre>
 <p>If we use <code>ls</code> to show the directory's contents, it appears that nothing has changed:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span></code></pre>
@@ -83,8 +103,22 @@ $ <span class="kw">cd</span> BootcampFiles</code></pre>
 ArmsLegs         .git                  Reference            work
 bootcampsetup.m  HeightWaistData.txt   S01_HealthData.mat</code></pre>
 <p>Git stores information about the project in this special sub-directory. If we ever delete it, we will lose the project's history.</p>
-<h2 id="adding-the-currently-existing-files.">Adding the currently existing files.</h2>
-<p>We're going to skip through the first step of adding the pre-existing files without explanation here. Exactly what we're doing here will be explained later in the tutorial.</p>
+<p>However, right now, .git contains very little data:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">du</span> -hc .git</code></pre>
+<pre class="output"><code>4.0K    .git/refs/heads
+4.0K    .git/refs/tags
+12K .git/refs
+4.0K    .git/branches
+44K .git/hooks
+8.0K    .git/info
+4.0K    .git/objects/info
+4.0K    .git/objects/pack
+12K .git/objects
+96K .git
+96K total</code></pre>
+<p>It certainly doesn't have at least one copy of every file in the project!</p>
+<h2 id="adding-the-project-files.">Adding the project files.</h2>
+<p>We're going to quickly add the pre-existing files to the repository without much explanation here. Exactly what we're doing here will be explained later in the tutorial.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add *
 $ <span class="kw">git</span> ci -m <span class="st">&quot;Initial commit&quot;</span></code></pre>
 <p>We can check that everything is set up correctly by asking Git to tell us the status of our project:</p>
@@ -94,6 +128,9 @@ $ <span class="kw">git</span> ci -m <span class="st">&quot;Initial commit&quot;<
 # Initial commit
 #
 nothing to commit (create/copy files and use &quot;git add&quot; to track)</code></pre>
+<p>We can check that there is now some information in .git using</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">du</span> -hc .git</code></pre>
+<p>There should now be much more data in there.</p>
 <h2 id="tracking-changes-to-files">Tracking Changes to Files</h2>
 <p>Let's create a file called <code>mars.txt</code> that contains some notes about the Red Planet's suitability as a base. (We'll use <code>nano</code> to edit the file; you can use whatever editor you like. In particular, this does not have to be the core.editor you set globally earlier.)</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> mars.txt</code></pre>
