@@ -40,7 +40,7 @@
 <li>Configure Git to ignore specific files, and explain why it is sometimes useful to do so.</li>
 </ul>
 </div>
-<p>We'll start by exploring how version control can be used to keep track of what one person did and when. Even if you aren't collaborating with other people, version control is much better for this than this:</p>
+<p>We'll start by exploring how version control can be used to keep track of what one person did and when. Even if you aren't collaborating with other people, using version control is much better than this:</p>
 <p><a href="http://www.phdcomics.com"><img src="fig/phd101212s.gif" alt="Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com" /></a></p>
 <p>&quot;Piled Higher and Deeper&quot; by Jorge Cham, http://www.phdcomics.com</p>
 <h2 id="setting-up">Setting Up</h2>
@@ -49,7 +49,7 @@
 $ <span class="kw">git</span> config --global user.email <span class="st">&quot;vlad@tran.sylvan.ia&quot;</span>
 $ <span class="kw">git</span> config --global color.ui <span class="st">&quot;auto&quot;</span>
 $ <span class="kw">git</span> config --global core.editor <span class="st">&quot;nano&quot;</span></code></pre>
-<p>(Please use your own name and email address instead of Dracula's, and please make sure you choose an editor that's actually on your system, such as <code>notepad</code> on Windows.)</p>
+<p>(Please use your own name and email address instead of Dracula's, and please make sure you choose an editor that's actually on your system, such as <code>notepad</code> on Windows, though nano should be fine for our course.)</p>
 <p>Git commands are written <code>git verb</code>, where <code>verb</code> is what we actually want it to do. In this case, we're telling Git:</p>
 <ul>
 <li>our name and email address,</li>
@@ -68,17 +68,25 @@ $ <span class="kw">git</span> config --global https.proxy proxy-url</code></pre>
 $ <span class="kw">git</span> config --global --unset https.proxy</code></pre>
 </div>
 <h2 id="creating-a-repository">Creating a Repository</h2>
-<p>Once Git is configured, we can start using it. Let's create a directory for our work:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> planets
-$ <span class="kw">cd</span> planets</code></pre>
+<p>We're going to work on a set of pre-existing files during this course, but we'll turn that into a git repository so that we can track changes made during the course. First download the course material:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">wget</span> ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip
+$ <span class="kw">unzip</span> BootcampFiles.zip
+$ <span class="kw">cd</span> BootcampFiles</code></pre>
 <p>and tell Git to make it a <a href="reference.html#repository">repository</a>—a place where Git can store old versions of our files:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> init</code></pre>
 <p>If we use <code>ls</code> to show the directory's contents, it appears that nothing has changed:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span></code></pre>
 <p>But if we add the <code>-a</code> flag to show everything, we can see that Git has created a hidden directory called <code>.git</code>:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span> -a</code></pre>
-<pre class="output"><code>.   ..  .git</code></pre>
+<pre class="output"><code>.                Exercises             InstructorMaterials  S04_Vectorisation.m
+..               findBestPredictors.m  MedicalData.txt      Test_Data
+ArmsLegs         .git                  Reference            work
+bootcampsetup.m  HeightWaistData.txt   S01_HealthData.mat</code></pre>
 <p>Git stores information about the project in this special sub-directory. If we ever delete it, we will lose the project's history.</p>
+<h2 id="adding-the-currently-existing-files.">Adding the currently existing files.</h2>
+<p>We're going to skip through the first step of adding the pre-existing files without explanation here. Exactly what we're doing here will be explained later in the tutorial.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add *
+$ <span class="kw">git</span> ci -m <span class="st">&quot;Initial commit&quot;</span></code></pre>
 <p>We can check that everything is set up correctly by asking Git to tell us the status of our project:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre>
 <pre class="output"><code># On branch master
@@ -125,7 +133,7 @@ nothing added to commit but untracked files present (use &quot;git add&quot; to 
 <pre class="output"><code>[master (root-commit) f22b25e] Starting to think about Mars
  1 file changed, 1 insertion(+)
  create mode 100644 mars.txt</code></pre>
-<p>When we run <code>git commit</code>, Git takes everything we have told it to save by using <code>git add</code> and stores a copy permanently inside the special <code>.git</code> directory. This permanent copy is called a <a href="reference.html#revision">revision</a> and its short identifier is <code>f22b25e</code>. (Your revision may have another identifier.)</p>
+<p>When we run <code>git commit</code>, Git takes everything we have told it to save by using <code>git add</code> and stores a copy permanently inside the special <code>.git</code> directory. This permanent copy is called a <a href="reference.html#revision">revision</a> and its short identifier is <code>f22b25e</code>. (Your revision should have another identifier.)</p>
 <p>We use the <code>-m</code> flag (for &quot;message&quot;) to record a comment that will help us remember later on what we did and why. If we just run <code>git commit</code> without the <code>-m</code> option, Git will launch <code>nano</code> (or whatever other editor we configured at the start) so that we can write a longer message.</p>
 <p>If we run <code>git status</code> now:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre>

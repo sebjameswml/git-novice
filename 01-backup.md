@@ -19,7 +19,7 @@ minutes: 60
 We'll start by exploring how version control can be used
 to keep track of what one person did and when.
 Even if you aren't collaborating with other people,
-version control is much better for this than this:
+using version control is much better than this:
 
 [![Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com](fig/phd101212s.gif)](http://www.phdcomics.com)
 
@@ -27,9 +27,8 @@ version control is much better for this than this:
 
 ## Setting Up
 
-The first time we use Git on a new machine,
-we need to configure a few things.
-Here's how Dracula sets up his new laptop:
+The first time we use Git on a new machine, we need to configure a few
+things.  Here's how Dracula sets up his new laptop:
 
 ~~~ {.bash}
 $ git config --global user.name "Vlad Dracula"
@@ -40,7 +39,7 @@ $ git config --global core.editor "nano"
 
 (Please use your own name and email address instead of Dracula's,
 and please make sure you choose an editor that's actually on your system,
-such as `notepad` on Windows.)
+such as `notepad` on Windows, though nano should be fine for our course.)
 
 Git commands are written `git verb`,
 where `verb` is what we actually want it to do.
@@ -74,13 +73,14 @@ the flag `--global` tells Git to use the settings for every project on this mach
 
 ## Creating a Repository
 
-Once Git is configured,
-we can start using it.
-Let's create a directory for our work:
+We're going to work on a set of pre-existing files during this course,
+but we'll turn that into a git repository so that we can track changes
+made during the course. First download the course material:
 
 ~~~ {.bash}
-$ mkdir planets
-$ cd planets
+$ wget ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip
+$ unzip BootcampFiles.zip
+$ cd BootcampFiles
 ~~~
 
 and tell Git to make it a [repository](reference.html#repository)&mdash;a place where
@@ -104,12 +104,26 @@ we can see that Git has created a hidden directory called `.git`:
 $ ls -a
 ~~~
 ~~~ {.output}
-.	..	.git
+.                Exercises             InstructorMaterials  S04_Vectorisation.m
+..               findBestPredictors.m  MedicalData.txt      Test_Data
+ArmsLegs         .git                  Reference            work
+bootcampsetup.m  HeightWaistData.txt   S01_HealthData.mat
 ~~~
 
 Git stores information about the project in this special sub-directory.
 If we ever delete it,
 we will lose the project's history.
+
+## Adding the currently existing files.
+
+We're going to skip through the first step of adding the pre-existing
+files without explanation here. Exactly what we're doing here will be
+explained later in the tutorial.
+
+~~~ {.bash}
+$ git add *
+$ git ci -m "Initial commit"
+~~~
 
 We can check that everything is set up correctly
 by asking Git to tell us the status of our project:
@@ -124,6 +138,7 @@ $ git status
 #
 nothing to commit (create/copy files and use "git add" to track)
 ~~~
+
 
 ## Tracking Changes to Files
 
@@ -220,7 +235,7 @@ Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a [revision](reference.html#revision)
 and its short identifier is `f22b25e`.
-(Your revision may have another identifier.)
+(Your revision should have another identifier.)
 
 We use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
