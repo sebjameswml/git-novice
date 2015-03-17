@@ -378,6 +378,23 @@ But the Mummy will appreciate the lack of humidity</code></pre>
 <p>As it says, <code>git checkout</code> without a version identifier restores files to the state saved in <code>HEAD</code>. The double dash <code>--</code> is needed to separate the names of the files being recovered from the command itself: without it, Git would try to use the name of the file as the revision identifier.</p>
 </div>
 <p>The fact that files can be reverted one by one tends to change the way people organize their work. If everything is in one large document, it's hard (but not impossible) to undo changes to the introduction without also undoing changes made later to the conclusion. If the introduction and conclusion are stored in separate files, on the other hand, moving backward and forward in time becomes much easier.</p>
+<h2 id="tagging-with-branch">Tagging with branch</h2>
+<p>You can put a tag at location in the history using git branch - this is the simplest use of a branch.</p>
+<p>Suppose we want to put in a marker at commit f22b25e as we expect to return to that point in the future.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> branch sometag f22b25e</code></pre>
+<p>There's no output from that command, but you can confirm that the branch was created using <code>git branch</code></p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> branch</code></pre>
+<pre class="output"><code>* master
+  sometag</code></pre>
+<p>Note that the * is on master - you've created that branch, but you're still on the master branch.</p>
+<p>Another way to see your branches is to use git log with some additional arguments:</p>
+<pre><code>git log --oneline --decorate --graph</code></pre>
+<p>You can put that long line in a git alias:</p>
+<pre><code>git config --global alias.tree &quot;log --oneline --decorate --graph&quot;</code></pre>
+<p>The enhanced log is now</p>
+<pre><code>git tree</code></pre>
+<p>Lastly, <code>gitk</code> will give you all this information.</p>
+<p>Try to use branches during the workshop when you work through the matlab material. Use them to mark points at which your examples work and between tasks.</p>
 <h2 id="ignoring-things">Ignoring Things</h2>
 <p>What if we have files that we do not want Git to track for us, like backup files created by our editor or intermediate files created during data analysis. Let's create a few dummy files:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> results

@@ -769,6 +769,52 @@ If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
 
+## Tagging with branch
+
+You can put a tag at location in the history using git branch - this
+is the simplest use of a branch.
+
+Suppose we want to put in a marker at commit f22b25e as we expect to
+return to that point in the future.
+
+~~~ {.bash}
+$ git branch sometag f22b25e
+~~~
+
+There's no output from that command, but you can confirm that the
+branch was created using `git branch`
+
+~~~ {.bash}
+$ git branch
+~~~
+~~~ {.output}
+* master
+  sometag
+~~~
+
+Note that the * is on master - you've created that branch, but you're
+still on the master branch.
+
+Another way to see your branches is to use git log with some
+additional arguments:
+
+    git log --oneline --decorate --graph
+
+You can put that long line in a git alias:
+
+    git config --global alias.tree "log --oneline --decorate --graph"
+
+The enhanced log is now
+
+    git tree
+
+Lastly, `gitk` will give you all this information.
+
+Try to use branches during the workshop when you work through the
+matlab material. Use them to mark points at which your examples work
+and between tasks.
+
+
 ## Ignoring Things
 
 What if we have files that we do not want Git to track for us,
