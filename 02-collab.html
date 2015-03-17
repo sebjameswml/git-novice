@@ -39,7 +39,22 @@
 </div>
 <p>Version control really comes into its own when we begin to collaborate with other people. We already have most of the machinery we need to do this; the only thing missing is to copy changes from one repository to another.</p>
 <p>Systems like Git allow us to move work between any two repositories. In practice, though, it's easiest to use one copy as a central hub, and to keep it on the web rather than on someone's laptop. Most programmers use hosting services like <a href="http://github.com">GitHub</a> or <a href="http://bitbucket.org">BitBucket</a> to hold those master copies; we'll explore the pros and cons of this in the final section of this lesson.</p>
-<p>Let's start by sharing the changes we've made to our current project with the world. Log in to GitHub, then click on the icon in the top right corner to create a new repository called <code>planets</code>:</p>
+<p>We'll start by creating a new project locally, and then we'll share this with the world.</p>
+<p>First we create a new directory called planets, and then initialise it as an empty repository.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> planets
+$ <span class="kw">cd</span> planets
+$ <span class="kw">git</span> init</code></pre>
+<p>Now, lets copy mars.txt into it from the other local repository.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cp</span> ../BootcampFiles/mars.txt .</code></pre>
+<p>Now add and commit this file.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add mars.txt
+$ <span class="kw">git</span> commit -m <span class="st">&quot;As copied in from the other project&quot;</span></code></pre>
+<p>Let's quickly add another commit, so that we have more than just the single commit here.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">echo</span> <span class="st">&quot;Wind may have been important for canyon formation on Mars&quot;</span> <span class="kw">&gt;</span> mars.txt
+$ <span class="kw">git</span> add mars.txt
+$ <span class="kw">git</span> commit -m <span class="st">&quot;A note on Martian wind&quot;</span></code></pre>
+<p>We're ready to share this repository now.</p>
+<p>Log in to GitHub, then click on the icon in the top right corner to create a new repository called <code>planets</code>:</p>
 <div class="figure">
 <img src="fig/github-create-repo-01.png" alt="Creating a Repository on GitHub (Step 1)" /><p class="caption">Creating a Repository on GitHub (Step 1)</p>
 </div>

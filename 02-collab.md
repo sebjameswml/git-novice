@@ -24,7 +24,42 @@ Most programmers use hosting services like [GitHub](http://github.com) or [BitBu
 to hold those master copies;
 we'll explore the pros and cons of this in the final section of this lesson.
 
-Let's start by sharing the changes we've made to our current project with the world.
+We'll start by creating a new project locally, and then we'll share
+this with the world.
+
+First we create a new directory called planets, and then initialise it
+as an empty repository.
+
+~~~ {.bash}
+$ mkdir planets
+$ cd planets
+$ git init
+~~~
+
+Now, lets copy mars.txt into it from the other local repository.
+
+~~~ {.bash}
+$ cp ../BootcampFiles/mars.txt .
+~~~
+
+Now add and commit this file.
+
+~~~ {.bash}
+$ git add mars.txt
+$ git commit -m "As copied in from the other project"
+~~~
+
+Let's quickly add another commit, so that we have more than just the
+single commit here.
+
+~~~ {.bash}
+$ echo "Wind may have been important for canyon formation on Mars" > mars.txt
+$ git add mars.txt
+$ git commit -m "A note on Martian wind"
+~~~
+
+We're ready to share this repository now.
+
 Log in to GitHub,
 then click on the icon in the top right corner to create a new repository called `planets`:
 
