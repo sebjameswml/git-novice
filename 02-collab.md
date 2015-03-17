@@ -53,7 +53,7 @@ Let's quickly add another commit, so that we have more than just the
 single commit here.
 
 ~~~ {.bash}
-$ echo "Wind may have been important for canyon formation on Mars" > mars.txt
+$ echo "Wind may have been important for canyon formation on Mars" >> mars.txt
 $ git add mars.txt
 $ git commit -m "A note on Martian wind"
 ~~~
