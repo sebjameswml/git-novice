@@ -810,6 +810,10 @@ The enhanced log is now
 
 Lastly, `gitk` will give you all this information.
 
+To remove a branch, use git branch with -D:
+
+    git branch -D sometag
+
 Try to use branches during the workshop when you work through the
 matlab material. Use them to mark points at which your examples work
 and between tasks.
