@@ -34,13 +34,13 @@ things.  Here's how Dracula sets up his new laptop:
 $ git config --global user.name "Vlad Dracula"
 $ git config --global user.email "vlad@tran.sylvan.ia"
 $ git config --global color.ui "auto"
-$ git config --global core.editor "nano"
+$ git config --global core.editor "notepad"
 $ git config --global core.autocrlf "true"
 ~~~
 
 (Please use your own name and email address instead of Dracula's,
 and please make sure you choose an editor that's actually on your system,
-such as `notepad` on Windows.)
+such as `notepad` on Windows or `nano` on Linux or Mac.)
 
 Git commands are written `git verb`,
 where `verb` is what we actually want it to do.
@@ -178,7 +178,7 @@ explained later in the tutorial.
 
 ~~~ {.bash}
 $ git add *
-$ git ci -m "Initial commit"
+$ git commit -m "Initial commit"
 ~~~
 
 We can check that everything is set up correctly
@@ -208,12 +208,12 @@ There should now be much more data in there.
 
 Let's create a file called `mars.txt` that contains some notes
 about the Red Planet's suitability as a base.
-(We'll use `nano` to edit the file;
+(We'll use `notepad` to edit the file;
 you can use whatever editor you like.
 In particular, this does not have to be the core.editor you set globally earlier.)
 
 ~~~ {.bash}
-$ nano mars.txt
+$ notepad mars.txt
 ~~~
 
 Type the text below into the `mars.txt` file:
@@ -304,7 +304,7 @@ and its short identifier is `f22b25e`.
 We use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
 If we just run `git commit` without the `-m` option,
-Git will launch `nano` (or whatever other editor we configured at the start)
+Git will launch `notepad` (or whatever other editor we configured at the start)
 so that we can write a longer message.
 
 If we run `git status` now:
@@ -352,11 +352,11 @@ and the log message Git was given when the revision was created.
 ## Changing a File
 
 Now suppose Dracula adds more information to the file.
-(Again, we'll edit with `nano` and then `cat` the file to show its contents;
+(Again, we'll edit with `notepad` and then `cat` the file to show its contents;
 you may use a different editor, and don't need to `cat`.)
 
 ~~~ {.bash}
-$ nano mars.txt
+$ notepad mars.txt
 $ cat mars.txt
 ~~~
 ~~~ {.output}
@@ -478,7 +478,7 @@ First,
 we'll add another line to the file:
 
 ~~~ {.bash}
-$ nano mars.txt
+$ notepad mars.txt
 $ cat mars.txt
 ~~~
 ~~~ {.output}
@@ -680,7 +680,7 @@ can we restore older versions of things?
 Let's suppose we accidentally overwrite our file:
 
 ~~~ {.bash}
-$ nano mars.txt
+$ notepad mars.txt
 $ cat mars.txt
 ~~~
 ~~~ {.output}
@@ -856,7 +856,7 @@ so let's tell Git to ignore them.
 We do this by creating a file in the root directory of our project called `.gitignore`.
 
 ~~~ {.bash}
-$ nano .gitignore
+$ notepad .gitignore
 $ cat .gitignore
 ~~~
 ~~~ {.output}

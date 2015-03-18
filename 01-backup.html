@@ -48,9 +48,9 @@
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> config --global user.name <span class="st">&quot;Vlad Dracula&quot;</span>
 $ <span class="kw">git</span> config --global user.email <span class="st">&quot;vlad@tran.sylvan.ia&quot;</span>
 $ <span class="kw">git</span> config --global color.ui <span class="st">&quot;auto&quot;</span>
-$ <span class="kw">git</span> config --global core.editor <span class="st">&quot;nano&quot;</span>
+$ <span class="kw">git</span> config --global core.editor <span class="st">&quot;notepad&quot;</span>
 $ <span class="kw">git</span> config --global core.autocrlf <span class="st">&quot;true&quot;</span></code></pre>
-<p>(Please use your own name and email address instead of Dracula's, and please make sure you choose an editor that's actually on your system, such as <code>notepad</code> on Windows.)</p>
+<p>(Please use your own name and email address instead of Dracula's, and please make sure you choose an editor that's actually on your system, such as <code>notepad</code> on Windows or <code>nano</code> on Linux or Mac.)</p>
 <p>Git commands are written <code>git verb</code>, where <code>verb</code> is what we actually want it to do. In this case, we're telling Git:</p>
 <ul>
 <li>our name and email address,</li>
@@ -120,7 +120,7 @@ bootcampsetup.m  HeightWaistData.txt   S01_HealthData.mat</code></pre>
 <h2 id="adding-the-project-files.">Adding the project files.</h2>
 <p>We're going to quickly add the pre-existing files to the repository without much explanation here. Exactly what we're doing here will be explained later in the tutorial.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> add *
-$ <span class="kw">git</span> ci -m <span class="st">&quot;Initial commit&quot;</span></code></pre>
+$ <span class="kw">git</span> commit -m <span class="st">&quot;Initial commit&quot;</span></code></pre>
 <p>We can check that everything is set up correctly by asking Git to tell us the status of our project:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre>
 <pre class="output"><code># On branch master
@@ -132,8 +132,8 @@ nothing to commit (create/copy files and use &quot;git add&quot; to track)</code
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">du</span> -hc .git</code></pre>
 <p>There should now be much more data in there.</p>
 <h2 id="tracking-changes-to-files">Tracking Changes to Files</h2>
-<p>Let's create a file called <code>mars.txt</code> that contains some notes about the Red Planet's suitability as a base. (We'll use <code>nano</code> to edit the file; you can use whatever editor you like. In particular, this does not have to be the core.editor you set globally earlier.)</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> mars.txt</code></pre>
+<p>Let's create a file called <code>mars.txt</code> that contains some notes about the Red Planet's suitability as a base. (We'll use <code>notepad</code> to edit the file; you can use whatever editor you like. In particular, this does not have to be the core.editor you set globally earlier.)</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">notepad</span> mars.txt</code></pre>
 <p>Type the text below into the <code>mars.txt</code> file:</p>
 <pre class="output"><code>Cold and dry, but everything is my favorite color</code></pre>
 <p><code>mars.txt</code> now contains a single line:</p>
@@ -171,7 +171,7 @@ nothing added to commit but untracked files present (use &quot;git add&quot; to 
  1 file changed, 1 insertion(+)
  create mode 100644 mars.txt</code></pre>
 <p>When we run <code>git commit</code>, Git takes everything we have told it to save by using <code>git add</code> and stores a copy permanently inside the special <code>.git</code> directory. This permanent copy is called a <a href="reference.html#revision">revision</a> and its short identifier is <code>f22b25e</code>. (Your revision should have another identifier.)</p>
-<p>We use the <code>-m</code> flag (for &quot;message&quot;) to record a comment that will help us remember later on what we did and why. If we just run <code>git commit</code> without the <code>-m</code> option, Git will launch <code>nano</code> (or whatever other editor we configured at the start) so that we can write a longer message.</p>
+<p>We use the <code>-m</code> flag (for &quot;message&quot;) to record a comment that will help us remember later on what we did and why. If we just run <code>git commit</code> without the <code>-m</code> option, Git will launch <code>notepad</code> (or whatever other editor we configured at the start) so that we can write a longer message.</p>
 <p>If we run <code>git status</code> now:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> status</code></pre>
 <pre class="output"><code># On branch master
@@ -189,8 +189,8 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 <p>If we run <code>ls</code> at this point, we will still see just one file called <code>mars.txt</code>. That's because Git saves information about files' history in the special <code>.git</code> directory mentioned earlier so that our filesystem doesn't become cluttered (and so that we can't accidentally edit or delete an old version).</p>
 </div>
 <h2 id="changing-a-file">Changing a File</h2>
-<p>Now suppose Dracula adds more information to the file. (Again, we'll edit with <code>nano</code> and then <code>cat</code> the file to show its contents; you may use a different editor, and don't need to <code>cat</code>.)</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> mars.txt
+<p>Now suppose Dracula adds more information to the file. (Again, we'll edit with <code>notepad</code> and then <code>cat</code> the file to show its contents; you may use a different editor, and don't need to <code>cat</code>.)</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">notepad</span> mars.txt
 $ <span class="kw">cat</span> mars.txt</code></pre>
 <pre class="output"><code>Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman</code></pre>
@@ -241,7 +241,7 @@ $ <span class="kw">git</span> commit -m <span class="st">&quot;Concerns about Ma
 <img src="fig/git-staging-area.svg" alt="The Git Staging Area" /><p class="caption">The Git Staging Area</p>
 </div>
 <p>Let's watch as our changes to a file move from our editor to the staging area and into long-term storage. First, we'll add another line to the file:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> mars.txt
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">notepad</span> mars.txt
 $ <span class="kw">cat</span> mars.txt</code></pre>
 <pre class="output"><code>Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
@@ -342,7 +342,7 @@ index df0654a..b36abfd 100644
 +But the Mummy will appreciate the lack of humidity</code></pre>
 <h2 id="recovering-old-versions">Recovering Old Versions</h2>
 <p>All right: we can save changes to files and see what we've changed---how can we restore older versions of things? Let's suppose we accidentally overwrite our file:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> mars.txt
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">notepad</span> mars.txt
 $ <span class="kw">cat</span> mars.txt</code></pre>
 <pre class="output"><code>We will need to manufacture our own oxygen</code></pre>
 <p><code>git status</code> now tells us that the file has been changed, but those changes haven't been staged:</p>
@@ -414,7 +414,7 @@ $ <span class="kw">touch</span> a.dat b.dat c.dat results/a.out results/b.out</c
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
 <p>Putting these files under version control would be a waste of disk space. What's worse, having them all listed could distract us from changes that actually matter, so let's tell Git to ignore them.</p>
 <p>We do this by creating a file in the root directory of our project called <code>.gitignore</code>.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nano</span> .gitignore
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">notepad</span> .gitignore
 $ <span class="kw">cat</span> .gitignore</code></pre>
 <pre class="output"><code>*.dat
 results/</code></pre>
