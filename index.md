@@ -47,7 +47,8 @@ software up to date on multiple separate computer systems.
 >
 > In this lesson we use Git from the Unix Shell.
 > Some previous experience with the shell is expected,
-> *but isn't mandatory*.
+> *but isn't mandatory*. The Git bash shell on Windows and git from a
+> Mac shell should work just as well.
 
 ## Topics
 
