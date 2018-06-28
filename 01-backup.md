@@ -5,7 +5,7 @@ subtitle: A Better Kind of Backup
 minutes: 60
 ---
 > ## Learning Objectives {.objectives}
-> 
+>
 > *   Explain which initialization and configuration steps are required once per machine,
 >     and which are required once per repository.
 > *   Go through the modify-add-commit cycle for single and multiple files
@@ -75,47 +75,11 @@ the flag `--global` tells Git to use the settings for every project on this mach
 
 ## Creating a Repository
 
-We're going to work on a set of pre-existing files during this course,
-but we'll turn that into a git repository so that we can track changes
-made during the course. First download the course material. You can do
-this with a few short commands on Linux or Mac:
+We're going to create a repository to play with first.
 
 ~~~ {.bash}
-$ wget ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip
-$ unzip BootcampFiles.zip
-$ cd BootcampFiles
-~~~
-
-On the Managed Desktop, paste
-
-ftp://anonymous:simulink@ftp.mathworks.com/outgoing/kdeeley/workshop/BootcampFiles.zip
-
-into an Internet Explorer window and save the file it opens. When I
-did this, it saved the file into ~/ManW7/Downloads/ so I did:
-
-~~~ {.bash}
-$ unzip ~/ManW7/Downloads/BootcampFiles.zip
-$ cd BootcampFiles
-~~~
-
-Let's just see how much information is stored inside Bootcampfiles:
-
-~~~ {.bash}
-$ du -hc .
-~~~
-
-~~~ {.output}
-4.0K	./work
-124K	./ArmsLegs
-12K	./Exercises/Literature
-8.0K	./Exercises/STRDIST_Test_Data
-244K	./Exercises
-512K	./InstructorMaterials/html
-864K	./InstructorMaterials
-8.0K	./Test_Data
-704K	./Reference
-2.9M	.
-2.9M	total
+mkdir planets
+cd planets
 ~~~
 
 Now lets tell Git to make this a [repository](reference.html#repository)&mdash;a place where
@@ -139,10 +103,7 @@ we can see that Git has created a hidden directory called `.git`:
 $ ls -a
 ~~~
 ~~~ {.output}
-.                Exercises             InstructorMaterials  S04_Vectorisation.m
-..               findBestPredictors.m  MedicalData.txt      Test_Data
-ArmsLegs         .git                  Reference            work
-bootcampsetup.m  HeightWaistData.txt   S01_HealthData.mat
+.  ..  .git
 ~~~
 
 Git stores information about the project in this special sub-directory.
@@ -168,18 +129,7 @@ $ du -hc .git
 96K	total
 ~~~
 
-It certainly doesn't have at least one copy of every file in the project!
-
 ## Adding the project files.
-
-We're going to quickly add the pre-existing files to the repository
-without much explanation here. Exactly what we're doing here will be
-explained later in the tutorial.
-
-~~~ {.bash}
-$ git add *
-$ git commit -m "Initial commit"
-~~~
 
 We can check that everything is set up correctly
 by asking Git to tell us the status of our project:
@@ -188,25 +138,17 @@ by asking Git to tell us the status of our project:
 $ git status
 ~~~
 ~~~ {.output}
-# On branch master
-#
-# Initial commit
-#
-nothing to commit (create/copy files and use "git add" to track)
+On branch master
+
+Initial commit
+
+nothing added to commit but untracked files present (use "git add" to track)
 ~~~
-
-We can check that there is now some information in .git using
-
-~~~ {.bash}
-$ du -hc .git
-~~~
-
-There should now be much more data in there.
 
 
 ## Tracking Changes to Files
 
-Let's create a file called `mars.txt` that contains some notes
+Let's create and edit a file called `mars.txt` that contains some notes
 about the Red Planet's suitability as a base.
 (We'll use `notepad` to edit the file;
 you can use whatever editor you like.
@@ -219,7 +161,7 @@ $ notepad mars.txt
 Type the text below into the `mars.txt` file:
 
 ~~~ {.output}
-Cold and dry, but everything is my favorite color
+Cold and dry, but everything is my favorite colour
 ~~~
 
 `mars.txt` now contains a single line:
@@ -234,7 +176,7 @@ mars.txt
 $ cat mars.txt
 ~~~
 ~~~ {.output}
-Cold and dry, but everything is my favorite color
+Cold and dry, but everything is my favorite colour
 ~~~
 
 If we check the status of our project again,
@@ -280,8 +222,10 @@ $ git status
 #
 ~~~
 
-Git now knows that it's supposed to keep track of `mars.txt`,
-but it hasn't yet recorded any changes for posterity as a commit.
+Git now knows that it's supposed to keep track of
+`mars.txt`. `mars.txt` is said to be *staged*.
+
+Git hasn't yet *recorded* any changes for posterity as a commit.
 To get it to do that,
 we need to run one more command:
 
@@ -946,11 +890,11 @@ nothing to commit, working directory clean
 
 > ## Recovering Older Versions of a File {.challenge}
 >
-> Jennifer has made changes to the Python script that she has been working on for weeks, and the 
+> Jennifer has made changes to the Python script that she has been working on for weeks, and the
 > modifications she made this morning "broke" the script and it no longer runs. She has spent
 > ~ 1hr trying to fix it, with no luck...
 >
-> Luckily, she has been keeping track of her revisions using Git! Which commands below will 
+> Luckily, she has been keeping track of her revisions using Git! Which commands below will
 > let her recover the last committed version of her Python script called
 > `data_cruncher.py`?
 >
@@ -971,7 +915,7 @@ nothing to commit, working directory clean
 > ## Places to Create Git Repositories {.challenge}
 >
 > The following sequence of commands creates one Git repository inside another:
-> 
+>
 > ~~~ {.bash}
 > cd           # return to home directory
 > mkdir alpha  # make a new directory alpha
@@ -981,5 +925,5 @@ nothing to commit, working directory clean
 > cd beta      # go into alpha/beta
 > git init     # make the beta sub-directory a Git repository
 > ~~~
-> 
+>
 > Why is it a bad idea to do this?
